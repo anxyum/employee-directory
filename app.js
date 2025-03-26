@@ -1,86 +1,125 @@
 const $employeesWrapper = document.querySelector(".employees-wrapper");
 
-let employeeId = 0;
-
-class Employee {
-  constructor(firstName, lastName, email, city, profilePicture, position) {
-    this.firstName = firstName;
-    this.lastName = lastName;
-    this.email = email;
-    this.city = city;
-    this.profilePicture = profilePicture;
-    this.position = position;
-    this.id = employeeId++;
-  }
-}
+// const employee = {
+//     id: 1,
+//     firstName: "Billy",
+//     lastName: "Krenzer",
+//     email: "billyK@contact.fr",
+//     role: "Dev",
+//     picture: "./user.jpg"
+// }
 
 const employees = [
-  new Employee(
-    "Billie",
-    "Krenzer",
-    "billie.krenzer@gmail.com",
-    "Tulsa",
-    "https://i.imgur.com/xjK9z2D.jpg",
-    "Employee"
-  ),
-  new Employee(
-    "John",
-    "Smith",
-    "john.smith@gmail.com",
-    "New York",
-    "https://i.imgur.com/random1.jpg",
-    "Employee"
-  ),
-  new Employee(
-    "Sarah",
-    "Johnson",
-    "sarah.johnson@gmail.com",
-    "Los Angeles",
-    "https://i.imgur.com/random2.jpg",
-    "Employee"
-  ),
-  new Employee(
-    "Michael",
-    "Brown",
-    "michael.brown@gmail.com",
-    "Chicago",
-    "https://i.imgur.com/random3.jpg",
-    "Employee"
-  ),
+  {
+    id: 1,
+    firstName: "Billo",
+    lastName: "Krenzer",
+    email: "billyK@contact.fr",
+    role: "Dev",
+    picture: "./user.jpg",
+  },
+  {
+    id: 1,
+    firstName: "Billy",
+    lastName: "Krenzer",
+    email: "billyK@contact.fr",
+    role: "Dev",
+    picture: "./user.jpg",
+  },
+  {
+    id: 1,
+    firstName: "Billy",
+    lastName: "Krenzer",
+    email: "billyK@contact.fr",
+    role: "Dev",
+    picture: "./user.jpg",
+  },
+  {
+    id: 1,
+    firstName: "Billy",
+    lastName: "Krenzer",
+    email: "billyK@contact.fr",
+    role: "Dev",
+    picture: "./user.jpg",
+  },
+  {
+    id: 1,
+    firstName: "Billy",
+    lastName: "Krenzer",
+    email: "billyK@contact.fr",
+    role: "Dev",
+    picture: "./user.jpg",
+  },
+  {
+    id: 1,
+    firstName: "Billy",
+    lastName: "Krenzer",
+    email: "billyK@contact.fr",
+    role: "Dev",
+    picture: "./user.jpg",
+  },
+  {
+    id: 1,
+    firstName: "Billy",
+    lastName: "Krenzer",
+    email: "billyK@contact.fr",
+    role: "Dev",
+    picture: "./user.jpg",
+  },
+  {
+    id: 1,
+    firstName: "Billy",
+    lastName: "Krenzer",
+    email: "billyK@contact.fr",
+    role: "Dev",
+    picture: "./user.jpg",
+  },
+  {
+    id: 1,
+    firstName: "Billy",
+    lastName: "Krenzer",
+    email: "billyK@contact.fr",
+    role: "Dev",
+    picture: "./user.jpg",
+  },
+  {
+    id: 1,
+    firstName: "Billy",
+    lastName: "Krenzer",
+    email: "billyK@contact.fr",
+    role: "Dev",
+    picture: "./user.jpg",
+  },
 ];
 
-console.log(employees);
+fetch("https://randomuser.me/api/?results=10")
+  .then(function (res) {
+    console.log(res);
+    return res.json();
+  })
+  .then(function (data) {
+    console.log(data);
+  })
+  .catch(function (err) {
+    console.log(err);
+  });
 
-employees.forEach((employee) => {
-  const employeeCard = document.createElement("div");
-  const employeeProfilePicture = document.createElement("img");
-  const employeeInformationWrapper = document.createElement("div");
-  const employeeName = document.createElement("h2");
-  const employeeEmail = document.createElement("p");
-  const employeeCity = document.createElement("p");
-  const employeePosition = document.createElement("p");
+employees.forEach(function (employee) {
+  const $employeeCard = document.createElement("div");
+  $employeeCard.classList.add("employee-card");
 
-  employeeCard.classList.add("employee-card");
-  employeeProfilePicture.classList.add("employee-profile-picture");
-  employeeInformationWrapper.classList.add("employee-information-wrapper");
-  employeeName.classList.add("employee-name");
-  employeeEmail.classList.add("employee-email");
-  employeeCity.classList.add("employee-city");
-  employeePosition.classList.add("employee-position");
+  const $employeePicture = document.createElement("img");
+  $employeePicture.src = employee.picture;
 
-  employeeProfilePicture.src = "./user.jpg";
-  employeeName.textContent = `${employee.firstName} ${employee.lastName}`;
-  employeeEmail.textContent = employee.email;
-  employeeCity.textContent = employee.city;
-  employeePosition.textContent = employee.position;
+  const $employeeInfos = document.createElement("ul");
+  $employeeInfos.classList.add("employee-infos");
 
-  employeeInformationWrapper.appendChild(employeeName);
-  employeeInformationWrapper.appendChild(employeeEmail);
-  employeeInformationWrapper.appendChild(employeeCity);
-  employeeInformationWrapper.appendChild(employeePosition);
+  const $employeeFullname = document.createElement("li");
+  $employeeFullname.classList.add("employee-fullname");
+  $employeeFullname.textContent = employee.firstName + " " + employee.lastName;
 
-  employeeCard.appendChild(employeeProfilePicture);
-  employeeCard.appendChild(employeeInformationWrapper);
-
-  $employeesWrapper.appendChild(employeeCard);
+  $employeeInfos.appendChild($employeeFullname);
+  $employeeCard.appendChild($employeePicture);
+  $employeeCard.appendChild($employeeInfos);
+  $employeesWrapper.appendChild($employeeCard);
 });
